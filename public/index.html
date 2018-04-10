@@ -51,7 +51,7 @@
       <hr>
 
       <h2>Students <small>{{ students.length }} total</small></h2>
-      <input type="text" minlength=1 maxlength=40 placeholder="Add Student" @keyup.enter="addStudent">
+      <input id="add-student" type="text" minlength=1 maxlength=40 placeholder="Add Student" @keyup.enter="addStudent">
 
       <div id="students">
         <div class="student panel" v-for="(student, index) in students" :key="index">
