@@ -1,0 +1,98 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 20px;
+  color: #252422;
+  font-family: Helvetica;
+  background-color: #FFF;
+  
+}
+
+#bookCompiler {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.panel {
+  padding: 10px 30px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 30px;
+
+  color: white;
+}
+
+#book {
+  background-color: rgb(0, 230, 103);
+}
+
+#workshop {
+  background-color: #FF9F1C;
+}
+
+#workshop #location {
+  margin-bottom: 10px;
+}
+
+.removeTeacher {
+  cursor: pointer;
+  font-size: 0.5em;
+}
+
+#students {
+  color: white;
+}
+
+.remove {
+  margin-top: 20px;
+  float: right;
+  cursor: pointer;
+}
+
+.student {
+  background-color: #EB5E28;
+}
+
+label {
+  display: block;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+input[type="text"] {
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+}
+
+textarea {
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+
+  min-height: 50px;
+  max-height: 800px;
+  
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+}
+
+.story-body textarea {
+  height: 200px;
+}
+
+#generate {
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 20px 40px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.4em;
+  background-color: #FF0054;
+  color: white;
+}
