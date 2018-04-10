@@ -66,7 +66,6 @@ new Vue({
         url: '/generate',
         data: JSON.stringify(data),
         success: (data) => {
-          alert("sad");
           window.location.href = data.path;
         },
         contentType: 'application/json; charset=utf-8',
