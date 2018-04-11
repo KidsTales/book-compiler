@@ -1,5 +1,6 @@
 const JSZip = require('jszip');
 const Docxtemplater = require('docxtemplater');
+const base64 = require('node-base64-image');
 
 const fs = require('fs');
 const path = require('path');
@@ -16,17 +17,16 @@ const opts = {
         return fs.readFileSync(tagValue);
     },
     getSize: (img, tagValue, tagName) => {
-        if (tagName == 'locationImage') {
+        /*if (tagName == 'locationImage') {
             sizeObj = sizeOf(img);
             return [sizeObj.width,sizeObj.height];
         }
-
+        */
         return [170, 130];
     }
 }
 
 const imageModule = new ImageModule(opts);
-
 
 
 module.exports = {
@@ -38,6 +38,10 @@ module.exports = {
         doc.attachModule(imageModule);
         doc.loadZip(zip);
 
+        students.forEach(s => {
+            s.image = 'pictures/' + s.imageName;
+        });
+
         const data = {
             year: new Date().getFullYear(),
             title,
@@ -47,7 +51,6 @@ module.exports = {
             students,
             stories: students.map(s => Object.assign(s.story, { studentName: s.name }))
         }
-        console.log(data.stories);
         
         doc.setData(data);
         doc.render();

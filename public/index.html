@@ -74,15 +74,15 @@
             <label :for="'story-body' + index">Story</label>
             <textarea :id="'story-body' + index" :name="'story-body' + index" :placeholder="student.name + '\'s bio'" v-model="student.story.body"></textarea>
           </div>
-
+          
+          <div class="picture">
+            <label :for="'picture' + index">Picture</label>
+            <input type="file" accept="image/*" @change="setPicture($event, student)" name="'picture' + index" id="'picture' + index">
+          </div>
         </div>
       </div>
 
       <hr>
-      
-      <div>
-        {{ rawD }}
-      </div>
       
       <button id="generate" @click="generate">Generate Book</button>
     </div>
