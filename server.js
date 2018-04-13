@@ -8,7 +8,7 @@ var storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const ext = file.originalname.split('.')[1];
-    cb(null, req.query.studentName + '.' + ext);
+    cb(null, req.query.studentName.replace(/ /g, '_') + '.' + ext);
   }
 })
 var upload = multer({ dest: 'pictures/', storage })
@@ -23,17 +23,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post('/generate', (req, res, next) => {
-  console.log(req.body);
+  
   //return res.end(JSON.stringify(req.body));
   bookCompiler.compile(req.body.book.title, req.body.book.subtitle, req.body.workshop.location, req.body.book.introduction, req.body.students)
   
   res.status(200);
-  return res.json({ path: 'docs/' + req.body.workshop.location.name + '.docx' });
+  return res.json({ path: 'docs/' + req.body.book.title + '.docx' });
 });
 
 app.post('/picture', upload.single('file'), function (req, res, next) {
   // req.file is the `avatar` file
   // req.body will hold the text fields, if there were any
-})
+  res.json({ success: true });
+});
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'));

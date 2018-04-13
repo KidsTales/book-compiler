@@ -5,15 +5,13 @@ const base64 = require('node-base64-image');
 const fs = require('fs');
 const path = require('path');
 
-
-
 const ImageModule = require('docxtemplater-image-module')
-
 const sizeOf = require('image-size');
 
 const opts = {
     centered: false,
     getImage: (tagValue, tagName) => {
+        console.log(tagValue + " | " + tagName);
         return fs.readFileSync(tagValue);
     },
     getSize: (img, tagValue, tagName) => {
@@ -27,17 +25,15 @@ const opts = {
 }
 
 const imageModule = new ImageModule(opts);
+const content = fs.readFileSync(path.join(__dirname, 'template.docx'), 'binary');
+const zip = new JSZip(content);
 
+const doc = new Docxtemplater();
+doc.attachModule(imageModule);
+doc.loadZip(zip);
 
 module.exports = {
     compile: (title, subtitle, location, introduction, students) => {
-        const content = fs.readFileSync(path.join(__dirname, 'template.docx'), 'binary');
-        const zip = new JSZip(content);
-        
-        const doc = new Docxtemplater();
-        doc.attachModule(imageModule);
-        doc.loadZip(zip);
-
         students.forEach(s => {
             s.image = 'pictures/' + s.imageName;
         });
@@ -53,9 +49,25 @@ module.exports = {
         }
         
         doc.setData(data);
-        doc.render();
+        
+        try {
+            // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
+            doc.render()
+        }
+        catch (error) {
+            var e = {
+                message: error.message,
+                name: error.name,
+                stack: error.stack,
+                properties: error.properties,
+            }
+            console.log(JSON.stringify({error: e}));
+            // The error thrown here contains additional information when logged with JSON.stringify (it contains a property object).
+            throw error;
+        }
+
         const buf = doc.getZip().generate({ type: 'nodebuffer' });
         //return buf;
-        fs.writeFileSync(path.resolve(__dirname, 'public', 'docs', location.name + '.docx'), buf);
+        fs.writeFileSync(path.resolve(__dirname, 'public', 'docs', title + '.docx'), buf);
     }
 }

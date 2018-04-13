@@ -2,14 +2,14 @@ new Vue({
   el: "#bookCompiler",
   data: {
     book: {
-      title: '',
-      subtitle: '',
-      introduction: ''
+      title: 'Example Title',
+      subtitle: 'Example subtitle',
+      introduction: 'Example intro'
     },
   	workshop: {
     	location: {
-        name: '',
-        description: ''
+        name: 'Example Location',
+        description: 'Example description'
       }
     },
     teachers: [],
@@ -46,13 +46,13 @@ new Vue({
     },
     setPicture: function(event, student) {
       const file = event.target.files[0];
-      student.imageName = student.name + '.' + file.name.split('.')[1];
+      student.imageName = student.name.replace(/ /g, '_') + '.' + file.name.split('.')[1];
       console.log(JSON.stringify(file));
       var fd = new FormData();
       fd.append('file',file);
 
       $.ajax({
-          url: '/picture?studentName=' + student.name,
+          url: '/picture?studentName=' + student.name.replace(/ /g, '_'),
           type: 'post',
           data: fd,
           contentType: false,
