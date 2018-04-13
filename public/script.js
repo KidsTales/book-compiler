@@ -10,7 +10,8 @@ new Vue({
       programDirector: 'Example Director',
     	location: {
         name: 'Example Location',
-        description: 'Example description'
+        description: 'Example description',
+        locationImage: ''
       }
     },
     students: [
@@ -59,6 +60,26 @@ new Vue({
           processData: false,
           success: function(response){
               alert('uploaded photo')
+          },
+      });
+    },
+    setLocationPicture: function(event) {
+      const file = event.target.files[0];
+      const fileName = this.workshop.location.name.replace(/ /g, '_') + '.' + file.name.split('.')[1];
+
+      this.workshop.location.locationImage = 'pictures/' + fileName;
+
+      var fd = new FormData();
+      fd.append('file',file);
+
+      $.ajax({
+          url: '/picture?fileName=' + fileName,
+          type: 'post',
+          data: fd,
+          contentType: false,
+          processData: false,
+          success: function(response){
+              alert('uploaded location photo')
           },
       });
     },

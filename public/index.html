@@ -38,6 +38,11 @@
           <input id="locationDescription" name="locationDescription" v-model="workshop.location.description" type="text" placeholder="Location Description">
         </div>
 
+        <div>
+          <label for="locationImage">Location Image</label>
+          <input type="file" name="locationImage" id="locationImage" accept="image/*" @change="setLocationPicture" >
+        </div>
+
         <div id="director">
           <label for="directorName">Program Director</label>
           <input type="text" name="directorName" id="directorName" v-model="workshop.programDirector" placeholder="Program Director">

@@ -15,11 +15,15 @@ const opts = {
         return fs.readFileSync(tagValue);
     },
     getSize: (img, tagValue, tagName) => {
-        /*if (tagName == 'locationImage') {
+        if (tagName == 'locationImage') {
             sizeObj = sizeOf(img);
-            return [sizeObj.width,sizeObj.height];
+            if (sizeObj.width > 600) {
+                sizeObj.width *= 0.5;
+                sizeObj.height *= 0.5;
+            }
+                return [sizeObj.width, sizeObj.height];
         }
-        */
+        
         return [170, 130];
     }
 }

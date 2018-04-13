@@ -8,7 +8,11 @@ var storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const ext = file.originalname.split('.')[1];
-    cb(null, req.query.studentName.replace(/ /g, '_') + '.' + ext);
+    if (req.query.studentName)
+      cb(null, req.query.studentName.replace(/ /g, '_') + '.' + ext);
+    
+    if (req.query.fileName)
+      cb(null, req.query.fileName);
   }
 })
 var upload = multer({ dest: 'pictures/', storage })
