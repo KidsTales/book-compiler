@@ -7,12 +7,12 @@ new Vue({
       introduction: 'Example intro'
     },
   	workshop: {
+      programDirector: 'Example Director',
     	location: {
         name: 'Example Location',
         description: 'Example description'
       }
     },
-    teachers: [],
     students: [
     	{
     		name: 'Frank Matranga',
@@ -62,22 +62,10 @@ new Vue({
           },
       });
     },
-    addTeacher: function(event) {
-    	const name = event.target.value;
-
-      if (this.teachers.filter(t => t === name).length > 0) return;
-
-      this.teachers.push(event.target.value);
-      event.target.value = '';
-    },
-    removeTeacher: function(teacher) {
-    	this.teachers = this.teachers.filter(t => t !== teacher);
-    },
     generate: function(event) {
     	const data = {
         book: this.book,
       	workshop: this.workshop,
-        teachers: this.teachers,
         students: this.students
       }
       console.log(data);

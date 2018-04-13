@@ -38,13 +38,9 @@
           <input id="locationDescription" name="locationDescription" v-model="workshop.location.description" type="text" placeholder="Location Description">
         </div>
 
-        <div id="teachers">
-          <label for="teacherName">Teachers <small>{{ teachers.length }} total</small></label>
-          <input type="text" name="teacherName" id="teacherName" @keyup.enter="addTeacher" placeholder="Add Teacher">
-
-          <ol>
-            <li v-for="(teacher, index) in teachers" :key="index">{{ teacher }} <span class="removeTeacher" @click="removeTeacher(teacher)">❌</span></li>
-          </ol>
+        <div id="director">
+          <label for="directorName">Program Director</label>
+          <input type="text" name="directorName" id="directorName" v-model="workshop.programDirector" placeholder="Program Director">
         </div>
       </div>
 

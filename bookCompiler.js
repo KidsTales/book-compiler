@@ -33,28 +33,32 @@ doc.attachModule(imageModule);
 doc.loadZip(zip);
 
 module.exports = {
-    compile: (title, subtitle, location, introduction, students) => {
+    compile: (book, workshop, students) => {
         students.forEach(s => {
             s.image = 'pictures/' + s.imageName;
         });
 
+        console.log(book);
+        console.log(workshop);
+        console.log(students);
+
         const data = {
             year: new Date().getFullYear(),
-            title,
-            subtitle,
-            location,
-            introduction,
+            title: book.title,
+            subtitle: book.subtitle,
+            programDirector: workshop.programDirector,
+            location: workshop.location,
+            introduction: book.introduction,
             students,
-            stories: students.map(s => Object.assign(s.story, { studentName: s.name }))
+            stories: students.map(s => Object.assign(s.story, { studentName: s.name, page: students.indexOf(s) + 7 }))
         }
-        
+
         doc.setData(data);
-        
+
         try {
             // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
             doc.render()
-        }
-        catch (error) {
+        } catch (error) {
             var e = {
                 message: error.message,
                 name: error.name,
@@ -68,6 +72,6 @@ module.exports = {
 
         const buf = doc.getZip().generate({ type: 'nodebuffer' });
         //return buf;
-        fs.writeFileSync(path.resolve(__dirname, 'public', 'docs', title + '.docx'), buf);
+        fs.writeFileSync(path.resolve(__dirname, 'public', 'docs', book.title + '.docx'), buf);
     }
 }
