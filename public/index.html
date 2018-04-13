@@ -11,19 +11,19 @@
   <body>
     <div id="bookCompiler">
       <h1>Kids Tales Workshop Book Compiler</h1>
-
+      
       <div class="panel" id="book">
         <h3>Book Info</h3>
         
         <div id="titles">
           <label for="title">Title</label>
-          <input id="title" name="title" v-model="book.title" type="text" placeholder="Book Title">
+          <input id="title" name="title" v-model="book.title" type="text" placeholder="Book Title" required>
 
           <label for="subtitle">Subtitle</label>
-          <input id="subtitle" name="subtitle" v-model="book.subtitle" type="text" placeholder="Book Subtitle">
+          <input id="subtitle" name="subtitle" v-model="book.subtitle" type="text" placeholder="Book Subtitle" required>
 
           <label for="introduction">Introduction</label>
-          <textarea id="introduction" name="introduction" v-model="book.introduction" type="text" placeholder="Book Introduction"></textarea>
+          <textarea id="introduction" name="introduction" v-model="book.introduction" type="text" placeholder="Book Introduction" required></textarea>
         </div>
       </div>
 
@@ -32,27 +32,27 @@
 
         <div id="location">
           <label for="locationName">Location Name</label>
-          <input id="locationName" name="locationName" v-model="workshop.location.name" type="text" placeholder="Location">
+          <input id="locationName" name="locationName" v-model="workshop.location.name" type="text" placeholder="Location" required>
 
           <label for="locationDescription">Location Description</label>
-          <input id="locationDescription" name="locationDescription" v-model="workshop.location.description" type="text" placeholder="Location Description">
+          <input id="locationDescription" name="locationDescription" v-model="workshop.location.description" type="text" placeholder="Location Description" required>
         </div>
 
         <div>
           <label for="locationImage">Location Image</label>
-          <input type="file" name="locationImage" id="locationImage" accept="image/*" @change="setLocationPicture" >
+          <input type="file" name="locationImage" id="locationImage" accept="image/*" @change="setLocationPicture" required>
         </div>
 
         <div id="director">
           <label for="directorName">Program Director</label>
-          <input type="text" name="directorName" id="directorName" v-model="workshop.programDirector" placeholder="Program Director">
+          <input type="text" name="directorName" id="directorName" v-model="workshop.programDirector" placeholder="Program Director" required>
         </div>
       </div>
 
       <hr>
 
       <h2>Students <small>{{ students.length }} total</small></h2>
-      <input id="add-student" type="text" minlength=1 maxlength=40 placeholder="Add Student" @keyup.enter="addStudent">
+      <input id="add-student" type="text" minlength=1 maxlength=40 placeholder="Type student name here and hit enter!" @keyup.enter="addStudent">
 
       <div id="students">
         <div class="student panel" v-for="(student, index) in students" :key="index">
@@ -63,31 +63,30 @@
 
           <div class="bio">
             <label :for="'bio' + index">Bio</label>
-            <textarea :id="'bio' + index" :name="'bio' + index" :placeholder="student.name + '...'" v-model="student.bio"></textarea>
+            <textarea :id="'bio' + index" :name="'bio' + index" :placeholder="student.name + '...'" v-model="student.bio" required></textarea>
           </div>
 
           <div class="story-title">
             <label :for="'story-title' + index">Story Title</label>
-            <input type="text" :id="'story-title' + index" :name="'story-title' + index" :placeholder="student.name + '\'s story title'" v-model="student.story.title">
+            <input type="text" :id="'story-title' + index" :name="'story-title' + index" :placeholder="student.name + '\'s story title'" v-model="student.story.title" required>
           </div>
 
           <div class="story-body">
             <label :for="'story-body' + index">Story</label>
-            <textarea :id="'story-body' + index" :name="'story-body' + index" :placeholder="student.name + '\'s bio'" v-model="student.story.body"></textarea>
+            <textarea :id="'story-body' + index" :name="'story-body' + index" :placeholder="student.name + '\'s bio'" v-model="student.story.body" required></textarea>
           </div>
           
           <div class="picture">
             <label :for="'picture' + index">Picture</label>
-            <input type="file" accept="image/*" @change="setPicture($event, student)" name="'picture' + index" id="'picture' + index">
+            <input type="file" accept="image/*" @change="setPicture($event, student)" name="'picture' + index" id="'picture' + index" required>
           </div>
         </div>
       </div>
 
       <hr>
       
-      <button id="generate" @click="generate">Generate Book</button>
-    </div>
-
+      <button id="generate" type="submit" @click="generate">Generate</button>
+      </div>
     <script src="script.js"></script>
     <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"

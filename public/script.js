@@ -2,28 +2,20 @@ new Vue({
   el: "#bookCompiler",
   data: {
     book: {
-      title: 'Example Title',
-      subtitle: 'Example subtitle',
-      introduction: 'Example intro'
+      title: '',
+      subtitle: '',
+      introduction: ''
     },
   	workshop: {
-      programDirector: 'Example Director',
+      programDirector: '',
     	location: {
-        name: 'Example Location',
-        description: 'Example description',
+        name: '',
+        description: '',
         locationImage: ''
       }
     },
     students: [
-    	{
-    		name: 'Frank Matranga',
-        bio: 'is a cool coder.',
-        story: {
-        	title: 'My Amazing Story',
-          body: 'I haven\'t written it yet!'
-        },
-        imageName: ''
-    	}
+    	
     ]
   },
   methods: {
@@ -59,7 +51,6 @@ new Vue({
           contentType: false,
           processData: false,
           success: function(response){
-              alert('uploaded photo')
           },
       });
     },
@@ -79,11 +70,13 @@ new Vue({
           contentType: false,
           processData: false,
           success: function(response){
-              alert('uploaded location photo')
           },
       });
     },
     generate: function(event) {
+      if (this.workshop.location.locationImage == '') return alert('You must add at least 1 student!');
+      if (this.students.length == 0) return alert('You must add at least 1 student!');
+
     	const data = {
         book: this.book,
       	workshop: this.workshop,
