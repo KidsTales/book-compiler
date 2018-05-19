@@ -5,13 +5,13 @@
   "name": "book-compiler",
   "version": "0.1.0",
   "dependencies": {
-    "docxtemplater": "^3.6.1",
-    "docxtemplater-image-module": "^3.1.0",
-    "express": "^4.16.3",
-    "image-size": "^0.6.2",
-    "jszip": "2.6.0",
-    "multer": "^1.3.0",
-    "node-base64-image": "^1.0.4",
-    "npm": "^5.8.0"
+    "docxtemplater": "*",
+    "docxtemplater-image-module": "*",
+    "express": "*",
+    "image-size": "*",
+    "jszip": "^2.6.1",
+    "multer": "*",
+    "node-base64-image": "*",
+    "npm": "*"
   }
 }
