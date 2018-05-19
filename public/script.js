@@ -3,7 +3,6 @@ new Vue({
   data: {
     book: {
       title: '',
-      subtitle: '',
       introduction: ''
     },
     workshop: {
