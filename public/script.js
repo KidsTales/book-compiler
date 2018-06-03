@@ -30,7 +30,7 @@ new Vue({
           title: '',
           body: ''
         },
-        imageName: event.target.value
+        imageName: 'students/' + event.target.value
       });
       event.target.value = '';
     },
@@ -63,13 +63,13 @@ new Vue({
       const file = event.target.files[0];
       const fileName = this.workshop.location.name.replace(/ /g, '_') + '.' + file.name.split('.')[1];
 
-      this.workshop.location.locationImage = 'pictures/' + fileName;
+      this.workshop.location.locationImage = 'pictures/locations/' + fileName;
 
       var fd = new FormData();
       fd.append('file', file);
 
       $.ajax({
-        url: '/picture?fileName=' + fileName,
+        url: '/locationImage?name=' + this.workshop.location.name,
         type: 'post',
         data: fd,
         contentType: false,

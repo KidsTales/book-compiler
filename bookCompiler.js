@@ -36,6 +36,8 @@ const doc = new Docxtemplater();
 doc.attachModule(imageModule);
 doc.loadZip(zip);
 
+const subtitle = 'An Anthology of Short Stories';
+
 module.exports = {
     compile: (book, workshop, students) => {
         students.forEach(s => {
@@ -49,6 +51,8 @@ module.exports = {
         const data = {
             year: new Date().getFullYear(),
             title: book.title,
+            subtitle,
+            teacherNames: workshop.teachers.join(', '),
             programDirector: workshop.programDirector,
             location: workshop.location,
             introduction: book.introduction,
